@@ -1,0 +1,12 @@
+{
+  "name": "Student Review Generator",
+  "description": "Make fast reviews",
+  "version": "1.0",
+  "manifest_version": 3,
+  "icons": {},
+  "action": {
+    "default_popup":"index.html"
+  },
+  "permissions": ["scripting", "activeTab"],
+  "background":{}
+}

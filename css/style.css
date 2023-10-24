@@ -1,0 +1,20 @@
+.row {
+    display: flex;
+    align-items: center;
+}
+.form-group {
+    margin-bottom: 5px;
+}
+#test_form {
+    width: 500px;
+    height: 200px;
+}
+#test_form input[type="range"] {
+    /*width: 140px;*/
+}
+#test_form input[type="text"] {
+    width: 25px;
+    margin: 0 5px;
+    padding: 2px 5px;
+    border-radius: 5px;
+}
