@@ -1,22 +1,20 @@
-class HomeworkProcessor extends Processor {
-    constructor(defs) {
-        super(defs)
-
-        this.definitions = defs
+class HomeworkProcessor extends SimpleLogicProcessor {
+    constructor(defs, input) {
+        super(defs, input)
     }
 
     estimate() {
-        let value = characteristics['homework'].value
-
+        let value = this.input.value
         let definition = ''
+        let range = this.input.range[1] - this.input.range[0]
 
-        if (value > 95) {
+        if (value > range * 0.95) {
             let highDefinitions = this.definitions[3]
             definition = this.getRandomDefinition(highDefinitions)
-        } else if (value > 75) {
+        } else if (value > range * 0.75) {
             let preHighDefinitions = this.definitions[2]
             definition = this.getRandomDefinition(preHighDefinitions)
-        } else if (value > 20) {
+        } else if (value > range * 0.2) {
             let midDefinitions = this.definitions[1]
             definition = this.getRandomDefinition(midDefinitions)
         } else {

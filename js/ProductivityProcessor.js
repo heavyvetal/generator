@@ -1,4 +1,4 @@
-class BehaviorProcessor extends SimpleLogicProcessor {
+class ProductivityProcessor extends SimpleLogicProcessor {
     constructor(defs, input) {
         super(defs, input)
     }
@@ -8,7 +8,7 @@ class BehaviorProcessor extends SimpleLogicProcessor {
         let definition = ''
         let range = this.input.range[1] - this.input.range[0]
 
-        if (value > range * 0.7) {
+        if (value > range * 0.9) {
             let highDefinitions = this.definitions[2]
             definition = this.getRandomDefinition(highDefinitions)
         } else if (value > range * 0.3) {

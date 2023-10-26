@@ -26,6 +26,7 @@ class SpeedProcessor extends FuzzySystemProcessor {
         this.system.outputs = [this.SPEED];
 
         this.system.rules = [
+            /*----------Оцінка----Активність--Продуктивність--Швидкість--------*/
             new Rule(['Відмінно', 'Активний', 'Відмінно'], ['Відмінно'], 'and'),
             new Rule(['Відмінно', 'Неактивний', 'Відмінно'], ['Відмінно'], 'and'),
             new Rule(['Відмінно', 'Активний', 'Добре'], ['Відмінно'], 'and'),
@@ -40,31 +41,41 @@ class SpeedProcessor extends FuzzySystemProcessor {
             new Rule(['Погано', 'Неактивний', 'Погано'], ['Погано'], 'and'),
             // Additional rules
             new Rule(['Погано', 'Активний', 'Відмінно'], ['Добре'], 'and'),
+            new Rule(['Відмінно', 'Неактивний', 'Погано'], ['Добре'], 'and'),
+            new Rule(['Добре', 'Активний', 'Добре'], ['Добре'], 'and'),
         ];
     }
 
     estimate() {
-        let value = this.system.getPreciseOutput([
-            characteristics['average_mark'].value,
-            characteristics['activity'].value,
-            characteristics['productivity'].value,
-        ])
-
         let definition = ''
-        // let highTermEdge = this.system.outputs[0].terms[2].mfParams[1]
-        // let lowTermEdge = this.system.outputs[0].terms[0].mfParams[3]
-        let highTermEdge = 75
-        let lowTermEdge = 35
+        let value = 0
 
-        if (value > highTermEdge) {
-            let highDefinitions = this.definitions[2]
-            definition = this.getRandomDefinition(highDefinitions)
-        } else if (value > lowTermEdge && value <= highTermEdge ) {
-            let midDefinitions = this.definitions[1]
-            definition = this.getRandomDefinition(midDefinitions)
-        } else {
-            let lowDefinitions = this.definitions[0]
-            definition = this.getRandomDefinition(lowDefinitions)
+        if (this.properties['average_mark'].use
+            && this.properties['activity'].use
+            && this.properties['productivity'].use
+        ) {
+            value = this.system.getPreciseOutput([
+                this.properties['average_mark'].value,
+                this.properties['activity'].value,
+                this.properties['productivity'].value,
+            ])
+
+            let highTerm = this.system.outputs[0].terms[2]
+            let midTerm = this.system.outputs[0].terms[1]
+            let lowTerm = this.system.outputs[0].terms[0]
+            let highTermEdge = (midTerm.mfParams[3] + highTerm.mfParams[0]) / 2
+            let lowTermEdge = (lowTerm.mfParams[3] + midTerm.mfParams[0]) / 2
+
+            if (value > highTermEdge) {
+                let highDefinitions = this.definitions[2]
+                definition = this.getRandomDefinition(highDefinitions)
+            } else if (value > lowTermEdge && value <= highTermEdge ) {
+                let midDefinitions = this.definitions[1]
+                definition = this.getRandomDefinition(midDefinitions)
+            } else {
+                let lowDefinitions = this.definitions[0]
+                definition = this.getRandomDefinition(lowDefinitions)
+            }
         }
 
         return {

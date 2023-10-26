@@ -1,8 +1,8 @@
 class Characteristic {
-    constructor(title, range, value, enabled) {
+    constructor(title, range, use) {
         this.title = title
         this.range = range
-        this.value = value
-        this.enabled = enabled
+        this.value = 0
+        this.use = use
     }
 }

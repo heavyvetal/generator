@@ -1,3 +1,7 @@
+.wrapper {
+    width: 500px;
+    min-height: 500px;
+}
 .row {
     display: flex;
     align-items: center;
@@ -5,16 +9,30 @@
 .form-group {
     margin-bottom: 5px;
 }
-#test_form {
-    width: 500px;
-    height: 200px;
+.btn {
+    background-color: #0d6efd;
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    cursor: pointer;
+    padding: 5px 10px;
 }
-#test_form input[type="range"] {
+.btn:hover {
+    background-color: #0dcaf0;
+    color: #000;
+}
+#main_form {
+    width: 500px;
+}
+#main_form input[type="range"] {
     /*width: 140px;*/
 }
-#test_form input[type="text"] {
+#main_form input[type="text"] {
     width: 25px;
     margin: 0 5px;
     padding: 2px 5px;
     border-radius: 5px;
+}
+#review {
+    margin-top: 15px;
 }
