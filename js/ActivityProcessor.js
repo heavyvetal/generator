@@ -4,13 +4,16 @@ class ActivityProcessor extends SimpleLogicProcessor {
     }
 
     estimate() {
-        let value = this.input.value
         let definition = ''
-        let range = this.input.range[1] - this.input.range[0]
+        let value = this.input.value
 
-        if (value > range * 0.7) {
-            let highDefinitions = this.definitions[0]
-            definition = this.getRandomDefinition(highDefinitions)
+        if (this.input.use) {
+            let range = this.input.range[1] - this.input.range[0]
+
+            if (value > range * 0.7) {
+                let highDefinitions = this.definitions[0]
+                definition = this.getRandomDefinition(highDefinitions)
+            }
         }
 
         return {

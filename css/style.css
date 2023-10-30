@@ -25,9 +25,9 @@
     width: 500px;
 }
 #main_form input[type="range"] {
-    /*width: 140px;*/
+
 }
-#main_form input[type="text"] {
+#main_form .number-input {
     width: 25px;
     margin: 0 5px;
     padding: 2px 5px;

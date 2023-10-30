@@ -16,80 +16,88 @@ let properties = {
     'attendance': new Characteristic('Відвідуваність', [0, 100], true),
 }
 
-// Outputs processors
-let fuzzyProcessors = [
-    new SpeedProcessor(speedDefinitions),
-    new DiligenceProcessor(diligenceDefinitions),
-    new RecommendationProcessor(recommendationDefinitions),
+let outputs = [
+    {
+        'processor': new SpeedProcessor(speedDefinitions),
+        'order': 0,
+    },
+    {
+        'processor': new DiligenceProcessor(diligenceDefinitions),
+        'order': 1,
+    },
+    {
+        'processor': new RecommendationProcessor(recommendationDefinitions),
+        'order': 0,
+    },
+    {
+        'processor': new ActivityProcessor(activityDefinitions, properties['activity']),
+        'order': 0,
+    },
+    {
+        'processor': new InterestProcessor(interestDefinitions, properties['interest']),
+        'order': 0,
+    },
+    {
+        'processor': new ProductivityProcessor(productivityDefinitions, properties['productivity']),
+        'order': 0,
+    },
+    {
+        'processor': new BehaviorProcessor(behaviorDefinitions, properties['behavior']),
+        'order': 0,
+    },
+    {
+        'processor': new HomeworkProcessor(homeworkDefinitions, properties['homework']),
+        'order': 2,
+    },
 ]
-let simpleProcessors = [
-    new ActivityProcessor(activityDefinitions, properties['activity']),
-    new InterestProcessor(interestDefinitions, properties['interest']),
-    new ProductivityProcessor(productivityDefinitions, properties['productivity']),
-    new BehaviorProcessor(behaviorDefinitions, properties['behavior']),
-    new HomeworkProcessor(homeworkDefinitions, properties['homework']),
-]
 
-/* ---  UI object creation --- */
-for (let property in properties) {
-    form.innerHTML += `
-        <div id="${property}" class="form-group">
-            <div>${properties[property].title}:</div>
-            <div class="row">
-                <input type="range" 
-                    id="${property}_slider"  name="${property}_slider" 
-                    min="${properties[property].range[0]}" 
-                    max="${properties[property].range[1]}" value="50">
-                <input type="text">
-                <input type="checkbox" name="${property}" ${properties[property].use ? 'checked' : ''}>
-            </div>
-        </div>
-    `
-}
-
-form.innerHTML += '<input type="submit" class="btn btn-primary" value="Отправить">'
-
+createForm()
 setInputValues()
 
 /* --- Listeners --- */
 addEventListener('input', function () {
     setInputValues()
-});
+})
 
-let checkboxes = document.querySelectorAll("input[type=checkbox]");
+let checkboxes = document.querySelectorAll("input[type=checkbox]")
 checkboxes.forEach(function(checkbox) {
     checkbox.addEventListener('change', function() {
         Array.from(checkboxes).map(i => {
             properties[i.name].use = i.checked
         })
     })
-});
+})
 
 form.onsubmit = function (e) {
     e.preventDefault()
-
     setInputValues()
 
     let review = ''
+    let studentName = document.querySelector('#student').value
 
-    // Fuzzy systems
-    for (let processor of fuzzyProcessors) {
-        let estimation = processor.estimate()
-        let definition = estimation['definition']
-        // if (processor instanceof DiligenceProcessor) review += estimation['value']
-        review += definition
-    }
-
-    // Simple systems
-    for (let processor of simpleProcessors) {
-        if (processor) {
-            let estimation = processor.estimate()
-            let definition = estimation['definition']
-
-            if (processor.input.use) {
-                review += definition
+    if (studentName) {
+        for (output of outputs) {
+            if (output.processor instanceof SpeedProcessor) {
+                outputs[0].processor.definitions = speedDefinitionsNamePrepared
             }
         }
+    }
+
+    outputs.sort(function(a, b) {
+        return a.order > b.order ? 1 : a.order < b.order ? -1 : 0
+    })
+
+    for (output of outputs) {
+        let estimation = output.processor.estimate()
+        let definition = estimation['definition']
+        // if (processor instanceof DiligenceProcessor) review += estimation['value']
+
+        if (studentName && output === outputs[0] && definition) {
+            review += `${studentName} `
+            definition = definition.toLowerCase()
+        }
+
+        review += definition + ' '
     }
 
     //console.log(review)
@@ -103,4 +111,30 @@ function setInputValues() {
         properties[property].value = rangeElem.value
         textElem.value = rangeElem.value
     }
+}
+
+function createForm() {
+    form.innerHTML += `
+<div class="form-group">
+    <div>Ім'я:</div>
+    <input id="student" type="text">
+</div>
+`
+    for (let property in properties) {
+        form.innerHTML += `
+<div id="${property}" class="form-group">
+    <div>${properties[property].title}:</div>
+    <div class="row">
+        <input type="range" 
+            id="${property}_slider"  name="${property}_slider" 
+            min="${properties[property].range[0]}" 
+            max="${properties[property].range[1]}" value="50">
+        <input class="number-input" type="text">
+        <input type="checkbox" name="${property}" ${properties[property].use ? 'checked' : ''}>
+    </div>
+</div>
+    `
+    }
+
+    form.innerHTML += '<input type="submit" class="btn btn-primary" value="Генерувати">'
 }
