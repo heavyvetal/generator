@@ -1,6 +1,7 @@
 class FuzzySystemProcessor extends Processor {
-    constructor(defs) {
+    constructor(defs, properties, system) {
         super(defs)
-        this.system = new FIS()
+        this.properties = properties
+        this.system = new system
     }
 }

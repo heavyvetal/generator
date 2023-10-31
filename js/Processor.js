@@ -1,7 +1,6 @@
 class Processor {
     constructor(defs) {
         this.definitions = defs
-        this.properties = properties
     }
 
     getRandomDefinition(defs) {

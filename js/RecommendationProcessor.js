@@ -1,28 +1,28 @@
 class RecommendationProcessor extends FuzzySystemProcessor {
-    constructor(defs) {
-        super(defs)
+    constructor(defs, properties, system, linguisticVariable, term, rule) {
+        super(defs, properties, system)
 
-        this.MARKS = new LinguisticVariable('Оцінки', [1, 12])
-        this.ATTENDANCE = new LinguisticVariable('Відсоток відвідувань', [0, 100])
-        this.RECOMMENDATION = new LinguisticVariable('Необхідність додаткового опрацювання навчального матеріалу', [0, 100])
+        this.MARKS = new linguisticVariable('Оцінки', [1, 12])
+        this.ATTENDANCE = new linguisticVariable('Відсоток відвідувань', [0, 100])
+        this.RECOMMENDATION = new linguisticVariable('Необхідність додаткового опрацювання навчального матеріалу', [0, 100])
 
-        this.MARKS.addTerm(new Term('Погано', 'trapeze', [1,1,5,7]))
-        this.MARKS.addTerm(new Term('Добре', 'trapeze', [5,7,12,12]))
+        this.MARKS.addTerm(new term('Погано', 'trapeze', [1,1,5,7]))
+        this.MARKS.addTerm(new term('Добре', 'trapeze', [5,7,12,12]))
 
-        this.ATTENDANCE.addTerm(new Term('Погано', 'trapeze', [0,0,60,70]))
-        this.ATTENDANCE.addTerm(new Term('Добре', 'trapeze', [60,70,100,100]))
+        this.ATTENDANCE.addTerm(new term('Погано', 'trapeze', [0,0,60,70]))
+        this.ATTENDANCE.addTerm(new term('Добре', 'trapeze', [60,70,100,100]))
 
-        this.RECOMMENDATION.addTerm(new Term('Ні', 'trapeze', [0,0,30,40]))
-        this.RECOMMENDATION.addTerm(new Term('Треба', 'trapeze', [30,40,100,100]))
+        this.RECOMMENDATION.addTerm(new term('Ні', 'trapeze', [0,0,30,40]))
+        this.RECOMMENDATION.addTerm(new term('Треба', 'trapeze', [30,40,100,100]))
 
         this.system.inputs = [this.MARKS, this.ATTENDANCE]
         this.system.outputs = [this.RECOMMENDATION]
 
         this.system.rules = [
-            new Rule(['Погано', 'Погано'], ['Треба'], 'and'),
-            new Rule(['Добре', 'Добре'], ['Ні'], 'and'),
-            new Rule(['Добре', 'Погано'], ['Ні'], 'and'),
-            new Rule(['Погано', 'Добре'], ['Треба'], 'and'),
+            new rule(['Погано', 'Погано'], ['Треба'], 'and'),
+            new rule(['Добре', 'Добре'], ['Ні'], 'and'),
+            new rule(['Добре', 'Погано'], ['Ні'], 'and'),
+            new rule(['Погано', 'Добре'], ['Треба'], 'and'),
         ];
     }
 

@@ -1,28 +1,28 @@
 class DiligenceProcessor extends FuzzySystemProcessor {
-    constructor(defs) {
-        super(defs)
+    constructor(defs, properties, system, linguisticVariable, term, rule) {
+        super(defs, properties, system)
 
-        this.MARKS = new LinguisticVariable('Оцінки', [1, 12])
-        this.HOMEWORK = new LinguisticVariable('Відсоток виконань ДЗ', [0, 100])
-        this.DILIGENCE = new LinguisticVariable('Старанність', [0, 100])
+        this.MARKS = new linguisticVariable('Оцінки', [1, 12])
+        this.HOMEWORK = new linguisticVariable('Відсоток виконань ДЗ', [0, 100])
+        this.DILIGENCE = new linguisticVariable('Старанність', [0, 100])
 
-        this.MARKS.addTerm(new Term('Погано', 'trapeze', [1,1,7,10]))
-        this.MARKS.addTerm(new Term('Добре', 'trapeze', [7,10,12,12]))
+        this.MARKS.addTerm(new term('Погано', 'trapeze', [1,1,7,10]))
+        this.MARKS.addTerm(new term('Добре', 'trapeze', [7,10,12,12]))
 
-        this.HOMEWORK.addTerm(new Term('Погано', 'trapeze', [0,0,60,70]));
-        this.HOMEWORK.addTerm(new Term('Добре', 'trapeze', [60,70,100,100]));
+        this.HOMEWORK.addTerm(new term('Погано', 'trapeze', [0,0,60,70]));
+        this.HOMEWORK.addTerm(new term('Добре', 'trapeze', [60,70,100,100]));
 
-        this.DILIGENCE.addTerm(new Term('Нестаранний', 'trapeze', [0,0,70,80]));
-        this.DILIGENCE.addTerm(new Term('Старанний', 'trapeze', [70,80,100,100]));
+        this.DILIGENCE.addTerm(new term('Нестаранний', 'trapeze', [0,0,70,80]));
+        this.DILIGENCE.addTerm(new term('Старанний', 'trapeze', [70,80,100,100]));
 
         this.system.inputs = [this.MARKS, this.HOMEWORK];
         this.system.outputs = [this.DILIGENCE];
 
         this.system.rules = [
-            new Rule(['Добре', 'Добре'], ['Старанний'], 'and'),
-            new Rule(['Погано', 'Погано'], ['Нестаранний'], 'and'),
-            new Rule(['Добре', 'Погано'], ['Нестаранний'], 'and'),
-            new Rule(['Погано', 'Добре'], ['Нестаранний'], 'and'),
+            new rule(['Добре', 'Добре'], ['Старанний'], 'and'),
+            new rule(['Погано', 'Погано'], ['Нестаранний'], 'and'),
+            new rule(['Добре', 'Погано'], ['Нестаранний'], 'and'),
+            new rule(['Погано', 'Добре'], ['Нестаранний'], 'and'),
         ];
     }
 

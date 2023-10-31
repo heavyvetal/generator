@@ -18,15 +18,36 @@ let properties = {
 
 let outputs = [
     {
-        'processor': new SpeedProcessor(speedDefinitions),
+        'processor': new SpeedProcessor(
+            speedDefinitions,
+            properties,
+            FIS,
+            LinguisticVariable,
+            Term,
+            Rule
+        ),
         'order': 0,
     },
     {
-        'processor': new DiligenceProcessor(diligenceDefinitions),
+        'processor': new DiligenceProcessor(
+            diligenceDefinitions,
+            properties,
+            FIS,
+            LinguisticVariable,
+            Term,
+            Rule
+        ),
         'order': 1,
     },
     {
-        'processor': new RecommendationProcessor(recommendationDefinitions),
+        'processor': new RecommendationProcessor(
+            recommendationDefinitions,
+            properties,
+            FIS,
+            LinguisticVariable,
+            Term,
+            Rule
+        ),
         'order': 0,
     },
     {
@@ -51,12 +72,13 @@ let outputs = [
     },
 ]
 
-createForm()
-setInputValues()
+createForm(form, properties)
+setInputValues(properties)
+
 
 /* --- Listeners --- */
 addEventListener('input', function () {
-    setInputValues()
+    setInputValues(properties)
 })
 
 let checkboxes = document.querySelectorAll("input[type=checkbox]")
@@ -104,7 +126,7 @@ form.onsubmit = function (e) {
     reviewUI.innerHTML = review
 }
 
-function setInputValues() {
+function setInputValues(properties) {
     for (let property in properties) {
         let rangeElem = document.querySelector(`#${property} input[type="range"]`)
         let textElem = document.querySelector(`#${property} input[type="text"]`)
@@ -113,7 +135,7 @@ function setInputValues() {
     }
 }
 
-function createForm() {
+function createForm(form, properties) {
     form.innerHTML += `
 <div class="form-group">
     <div>Ім'я:</div>

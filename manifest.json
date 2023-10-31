@@ -1,12 +1,35 @@
 {
   "name": "Student Review Generator",
-  "description": "Make fast reviews",
-  "version": "1.0",
+  "description": "Make fast reviews/feedbacks/reports on students",
+  "version": "2.0",
   "manifest_version": 3,
   "icons": {},
-  "action": {
-    "default_popup":"index.html"
-  },
-  "permissions": ["scripting", "activeTab"],
-  "background":{}
+  "permissions": [
+    "scripting",
+    "tabs",
+    "activeTab",
+    "storage"
+  ],
+  "content_scripts": [
+    {
+      "matches": [ "*://logbook.itstep.org/*" ],
+      "js": [
+        "js/sentences.js",
+        "js/fuzzyis-v1.0.0.js",
+        "js/Characteristic.js",
+        "js/Processor.js",
+        "js/SimpleLogicProcessor.js",
+        "js/FuzzySystemProcessor.js",
+        "js/ActivityProcessor.js",
+        "js/BehaviorProcessor.js",
+        "js/DiligenceProcessor.js",
+        "js/HomeworkProcessor.js",
+        "js/InterestProcessor.js",
+        "js/ProductivityProcessor.js",
+        "js/RecommendationProcessor.js",
+        "js/SpeedProcessor.js",
+        "js/content.js"
+      ]
+    }
+  ]
 }

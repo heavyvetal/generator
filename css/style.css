@@ -2,14 +2,14 @@
     width: 500px;
     min-height: 500px;
 }
-.row {
+#main_form .row {
     display: flex;
     align-items: center;
 }
-.form-group {
+#main_form .form-group {
     margin-bottom: 5px;
 }
-.btn {
+#main_form .btn {
     background-color: #0d6efd;
     border: none;
     border-radius: 10px;
@@ -17,21 +17,18 @@
     cursor: pointer;
     padding: 5px 10px;
 }
-.btn:hover {
+#main_form .btn:hover {
     background-color: #0dcaf0;
     color: #000;
 }
 #main_form {
-    width: 500px;
-}
-#main_form input[type="range"] {
-
+    width: 200px;
 }
 #main_form .number-input {
-    width: 25px;
+    width: 40px;
     margin: 0 5px;
     padding: 2px 5px;
-    border-radius: 5px;
+    border: none;
 }
 #review {
     margin-top: 15px;
