@@ -1,7 +1,7 @@
 {
   "name": "Student Review Generator",
   "description": "Make fast reviews/feedbacks/reports on students",
-  "version": "2.0",
+  "version": "2.1",
   "manifest_version": 3,
   "icons": {},
   "permissions": [
@@ -14,21 +14,21 @@
     {
       "matches": [ "*://logbook.itstep.org/*" ],
       "js": [
-        "js/sentences.js",
-        "js/fuzzyis-v1.0.0.js",
-        "js/Characteristic.js",
-        "js/Processor.js",
-        "js/SimpleLogicProcessor.js",
-        "js/FuzzySystemProcessor.js",
-        "js/ActivityProcessor.js",
-        "js/BehaviorProcessor.js",
-        "js/DiligenceProcessor.js",
-        "js/HomeworkProcessor.js",
-        "js/InterestProcessor.js",
-        "js/ProductivityProcessor.js",
-        "js/RecommendationProcessor.js",
-        "js/SpeedProcessor.js",
-        "js/content.js"
+        "js/app/sentences.js",
+        "js/libs/fuzzyis-v1.0.0.js",
+        "js/app/Characteristic.js",
+        "js/app/processors/Processor.js",
+        "js/app/processors/SimpleLogicProcessor.js",
+        "js/app/processors/FuzzySystemProcessor.js",
+        "js/app/processors/ActivityProcessor.js",
+        "js/app/processors/BehaviorProcessor.js",
+        "js/app/processors/DiligenceProcessor.js",
+        "js/app/processors/HomeworkProcessor.js",
+        "js/app/processors/InterestProcessor.js",
+        "js/app/processors/ProductivityProcessor.js",
+        "js/app/processors/RecommendationProcessor.js",
+        "js/app/processors/SpeedProcessor.js",
+        "js/app/content.js"
       ]
     }
   ]
