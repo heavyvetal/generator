@@ -1,6 +1,7 @@
 {
   "name": "Student Review Generator",
   "description": "Make fast reviews/feedbacks/reports on students",
+  "author": "Vitalii Sviatodukh",
   "version": "2.2",
   "manifest_version": 3,
   "icons": {},
