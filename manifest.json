@@ -1,7 +1,7 @@
 {
   "name": "Student Review Generator",
   "description": "Make fast reviews/feedbacks/reports on students",
-  "version": "2.1",
+  "version": "2.2",
   "manifest_version": 3,
   "icons": {},
   "permissions": [

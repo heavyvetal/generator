@@ -1,6 +1,7 @@
 class Processor {
     constructor(defs) {
         this.definitions = defs
+        this.softMode = true
     }
 
     getRandomDefinition(defs) {

@@ -45,8 +45,11 @@ class DiligenceProcessor extends FuzzySystemProcessor {
                 let highDefinitions = this.definitions[1]
                 definition = this.getRandomDefinition(highDefinitions)
             } else {
-                let lowDefinitions = this.definitions[0]
-                definition = this.getRandomDefinition(lowDefinitions)
+                // This blocker is designed to soften the response
+                if (!this.softMode) {
+                    let lowDefinitions = this.definitions[0]
+                    definition = this.getRandomDefinition(lowDefinitions)
+                }
             }
         }
 

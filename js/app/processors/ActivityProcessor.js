@@ -10,7 +10,7 @@ class ActivityProcessor extends SimpleLogicProcessor {
         if (this.input.use) {
             let range = this.input.range[1] - this.input.range[0]
 
-            if (value > range * 0.7) {
+            if (value > range * 0.8) {
                 let highDefinitions = this.definitions[0]
                 definition = this.getRandomDefinition(highDefinitions)
             }

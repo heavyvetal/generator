@@ -8,8 +8,8 @@ const reviewUI = document.querySelector('#review')
 // Input properties
 let properties = {
     'activity': new Characteristic('Активність', [0, 100], true),
-    'productivity': new Characteristic('Продуктивність', [0, 11], true),
-    'interest': new Characteristic('Інтерес до навчання', [0, 100], true),
+    'productivity': new Characteristic('Продуктивність', [0, 100], true),
+    'interest': new Characteristic('Інтерес до навчання', [0, 100], false),
     'behavior': new Characteristic('Поведінка', [0, 100], false),
     'homework': new Characteristic('Домашні завдання %', [0, 100], true),
     'average_mark': new Characteristic('Середня оцінка', [0, 12], true),
